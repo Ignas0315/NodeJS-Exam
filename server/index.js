@@ -34,6 +34,21 @@ const userLoginSchema = Joi.object({
     password: Joi.string().required(),
 });
 
+const accountsSchema = Joi.object({
+    group_id: Joi.number().integer().required(),
+    // user_id: Joi.number().integer().required()
+});
+
+const newBillSchema = Joi.object({
+    group_id: Joi.number().integer().required(),
+    amount: Joi.number().required(),
+    description: Joi.string().trim(),
+});
+
+const groupBillsSchema = Joi.object({
+    group_id: Joi.number().integer().required(),
+});
+
 server.get('/groups', async (_, res) => {
     try {
         const [group] = await pool.execute('SELECT * FROM bills_project.groups');
@@ -99,26 +114,9 @@ server.post('/login', async (req, res) => {
 
     try {
         const [loginData] = await pool.execute(
-            `SELECT * FROM bills_project.users WHERE email = ?`,
+            `SELECT * FROM bills_project.users WHERE email = (?)`,
             [loginPayload.email]
         );
-
-        // if (!data.length) {
-        //     return res.status(400).send({ err: 'Email or password did not match' });
-        // }
-
-        // const isPasswordMatching = await bcrypt.compare(payload.password, data[0].password);
-
-        // if (isPasswordMatching) {
-        //     const token = jwt.sign(
-        //         {
-        //             email: data[0].email,
-        //             id: data[0].id,
-        //         },
-        //         process.env.JWT_SECRET
-        //     );
-        //     return res.status(200).send({ token });
-        // }
 
         if (!loginData.length) {
             return res.status(400).send({ err: 'Email or password did not match' });
@@ -137,6 +135,84 @@ server.post('/login', async (req, res) => {
             return res.status(200).send({ token });
         }
     } catch (error) {}
+});
+
+server.post('/accounts', async (req, res) => {
+    const token = req.headers.authorization?.split(' ')[1];
+    const decryptToken = jwt.verify(token, process.env.JWT_SECRET);
+    const user_id = decryptToken.id;
+
+    let postAccountsPayload = req.body;
+
+    try {
+        postAccountsPayload = await accountsSchema.validateAsync(postAccountsPayload);
+    } catch (error) {
+        return res.status(400).send({ error: error.message }).end();
+    }
+
+    if (!user_id) {
+        res.status(400).send({
+            error: 'User ID not provided',
+        });
+    }
+
+    if (isNaN(user_id) || typeof user_id !== 'number') {
+        res.status(400).send({
+            error: 'User ID must be integer number',
+        });
+    }
+
+    try {
+        await pool.execute(
+            `INSERT INTO bills_project.accounts VALUES (?,?)`,
+            postAccountsPayload.group_id,
+            user_id
+        );
+
+        return res.status(201).send('User added to the group');
+    } catch (error) {
+        res.status(500).send(error).end();
+        return console.error(error);
+    }
+});
+
+server.get('/accounts', async (req, res) => {
+    const token = req.headers.authorization?.split(' ')[1];
+    const decryptToken = jwt.verify(token, process.env.JWT_SECRET);
+    const user_id = decryptToken.id;
+
+    try {
+        const [getGroupsOfUser] = await pool.execute(
+            `SELECT bills_project.groups.id, bills_project.groups.name FROM bills_project.groups INNER JOIN accounts ON accounts.group_id = bills_project.groups.id WHERE accounts.user_id =(?)`,
+            user_id
+        );
+
+        return res.status(200).send(getGroupsOfUser[0]).end();
+    } catch (error) {
+        res.status(500).send(error).end();
+    }
+});
+
+server.get('/bills:group_id', async (req, res) => {
+    let billsPayload = req.params;
+
+    try {
+        billsPayload = await groupBillsSchema.validateAsync(billsPayload);
+    } catch (error) {
+        return res.status(400).send({ error: error.message }).end();
+    }
+
+    try {
+        const [groups] = await pool.execute(
+            `SELECT * FROM bills_project.bills WHERE group_id=(?)`,
+            [billsPayload.group_id]
+        );
+
+        return res.status(200).send(groups).end();
+    } catch (error) {
+        res.status(500).send(error).end();
+        return console.error(error);
+    }
 });
 
 server.listen(PORT, () => console.log(`Server is running on PORT:${PORT}`));
