@@ -215,4 +215,28 @@ server.get('/bills:group_id', async (req, res) => {
     }
 });
 
+server.post('bills', async (req, res) => {
+    let billsPostPayload = req.body;
+
+    try {
+        billsPostPayload = await newBillSchema.validateAsync(billsPostPayload);
+    } catch (error) {
+        return res.status(400).send({ error: error.message }).end();
+    }
+
+    try {
+        await pool.execute(
+            `INSERT INTO bills_project.bills (group_id, amount, description) VALUES (?,?,?)`,
+            [billsPostPayload.group_id, billsPostPayload.amount, billsPostPayload.description]
+        );
+
+        res.status(200).send({
+            message: `The bill was added to group ${billsPostPayload.group_id}`,
+        });
+    } catch (error) {
+        res.status(500).send(error).end();
+        return console.error(error);
+    }
+});
+
 server.listen(PORT, () => console.log(`Server is running on PORT:${PORT}`));
