@@ -24,6 +24,16 @@ const getUserGroups = async () => {
 
         const userGroups = await res.json();
 
+        console.log(userGroups);
+
+        if (userGroups.length === 0) {
+            return 0;
+        }
+
+        if (!res.ok) {
+            return window.location.assign('./login.html');
+        }
+
         return userGroups;
     } catch (error) {
         console.error(error);
