@@ -49,7 +49,7 @@ const groupBillsSchema = Joi.object({
     group_id: Joi.number().integer().required(),
 });
 
-server.get('/groups', async (_, res) => {
+server.get('/groups', authenticate, async (_, res) => {
     try {
         const [group] = await pool.execute('SELECT * FROM bills_project.groups');
         res.json(group);
@@ -58,7 +58,7 @@ server.get('/groups', async (_, res) => {
     }
 });
 
-server.post('/groups', async (req, res) => {
+server.post('/groups', authenticate, async (req, res) => {
     let groupsPayload = req.body;
 
     try {
@@ -89,14 +89,18 @@ server.post('/register', async (req, res) => {
     }
 
     try {
-        const encryptedPassword = await bcrypt.hash(registrationEntryPayload.password, 10);
+        const encryptedPassword = await bcrypt.hashSync(registrationEntryPayload.password, 10);
 
         await pool.execute(
             `INSERT INTO bills_project.users (full_name,email,password) VALUES (?,?,?)`,
-            [registrationEntryPayload.full_name, registrationEntryPayload.email, encryptedPassword]
+            [
+                registrationEntryPayload.full_name,
+                registrationEntryPayload.email,
+                mysql.escape(encryptedPassword),
+            ]
         );
 
-        return res.status(201).send('Registration has been successful');
+        return res.status(201).send({ message: 'Registered' }).end();
     } catch (error) {
         res.status(500).send(error).end();
         return console.error(error);
@@ -122,7 +126,10 @@ server.post('/login', async (req, res) => {
             return res.status(400).send({ err: 'Email or password did not match' });
         }
 
-        const isPasswordMatching = await bcrypt.compare(loginPayload.password, data[0].password);
+        const isPasswordMatching = await bcrypt.compare(
+            loginPayload.password,
+            loginData[0].password
+        );
 
         if (isPasswordMatching) {
             const token = jwt.sign(
@@ -137,7 +144,7 @@ server.post('/login', async (req, res) => {
     } catch (error) {}
 });
 
-server.post('/accounts', async (req, res) => {
+server.post('/accounts', authenticate, async (req, res) => {
     const token = req.headers.authorization?.split(' ')[1];
     const decryptToken = jwt.verify(token, process.env.JWT_SECRET);
     const user_id = decryptToken.id;
@@ -176,7 +183,7 @@ server.post('/accounts', async (req, res) => {
     }
 });
 
-server.get('/accounts', async (req, res) => {
+server.get('/accounts', authenticate, async (req, res) => {
     const token = req.headers.authorization?.split(' ')[1];
     const decryptToken = jwt.verify(token, process.env.JWT_SECRET);
     const user_id = decryptToken.id;
@@ -193,7 +200,7 @@ server.get('/accounts', async (req, res) => {
     }
 });
 
-server.get('/bills:group_id', async (req, res) => {
+server.get('/bills:group_id', authenticate, async (req, res) => {
     let billsPayload = req.params;
 
     try {
@@ -215,7 +222,7 @@ server.get('/bills:group_id', async (req, res) => {
     }
 });
 
-server.post('bills', async (req, res) => {
+server.post('bills', authenticate, async (req, res) => {
     let billsPostPayload = req.body;
 
     try {
