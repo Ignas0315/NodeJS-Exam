@@ -36,7 +36,6 @@ const userLoginSchema = Joi.object({
 
 const accountsSchema = Joi.object({
     group_id: Joi.number().integer().required(),
-    // user_id: Joi.number().integer().required()
 });
 
 const newBillSchema = Joi.object({
@@ -169,14 +168,19 @@ server.post('/accounts', authenticate, async (req, res) => {
         });
     }
 
-    try {
-        await pool.execute(
-            `INSERT INTO bills_project.accounts VALUES (?,?)`,
-            postAccountsPayload.group_id,
-            user_id
-        );
+    if (isNaN(postAccountsPayload.group_id) || typeof postAccountsPayload.group_id !== 'number') {
+        res.status(400).send({
+            error: 'Group ID must be integer number',
+        });
+    }
 
-        return res.status(201).send('User added to the group');
+    try {
+        await pool.execute(`INSERT INTO bills_project.accounts (group_id,user_id) VALUES (?,?)`, [
+            postAccountsPayload.group_id,
+            user_id,
+        ]);
+
+        return res.status(201).send({ message: 'User added to the group' });
     } catch (error) {
         res.status(500).send(error).end();
         return console.error(error);
@@ -191,10 +195,10 @@ server.get('/accounts', authenticate, async (req, res) => {
     try {
         const [getGroupsOfUser] = await pool.execute(
             `SELECT bills_project.groups.id, bills_project.groups.name FROM bills_project.groups INNER JOIN accounts ON accounts.group_id = bills_project.groups.id WHERE accounts.user_id =(?)`,
-            user_id
+            [user_id]
         );
 
-        return res.status(200).send(getGroupsOfUser[0]).end();
+        return res.status(200).send(getGroupsOfUser).end();
     } catch (error) {
         res.status(500).send(error).end();
     }
@@ -222,7 +226,7 @@ server.get('/bills:group_id', authenticate, async (req, res) => {
     }
 });
 
-server.post('bills', authenticate, async (req, res) => {
+server.post('/bills', authenticate, async (req, res) => {
     let billsPostPayload = req.body;
 
     try {
