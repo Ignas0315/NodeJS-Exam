@@ -10,7 +10,7 @@
 }
 
 .button1 {
-    background-color: #4caf50;
+    background-color: #1c797c;
 }
 
 .button1:hover {
@@ -23,4 +23,12 @@
 
 .button2:hover {
     background-color: #0077a7;
+}
+
+label {
+    display: block;
+}
+
+input {
+    display: block;
 }
