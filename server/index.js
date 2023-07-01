@@ -36,6 +36,7 @@ const userLoginSchema = Joi.object({
 
 const accountsSchema = Joi.object({
     group_id: Joi.number().integer().required(),
+    // user_id: Joi.number().integer().required()
 });
 
 const newBillSchema = Joi.object({
@@ -130,6 +131,8 @@ server.post('/login', async (req, res) => {
             loginData[0].password
         );
 
+        console.log(isPasswordMatching);
+
         if (isPasswordMatching) {
             const token = jwt.sign(
                 {
@@ -204,7 +207,7 @@ server.get('/accounts', authenticate, async (req, res) => {
     }
 });
 
-server.get('/bills:group_id', authenticate, async (req, res) => {
+server.get('/bills/:group_id', authenticate, async (req, res) => {
     let billsPayload = req.params;
 
     try {
