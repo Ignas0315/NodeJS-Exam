@@ -1,5 +1,4 @@
 import { renderUserGroups } from './renderGroups.js';
-import { userToGroup } from './assignUserToGroup.js';
 
 await renderUserGroups();
 
