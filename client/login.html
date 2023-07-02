@@ -10,33 +10,41 @@
         <script src="./modules/login.js" defer></script>
     </head>
     <body>
-        <header></header>
-        <main>
-            <section>
-                <h1>Login</h1>
-                <form id="login-form">
-                    <label for="email">Email</label>
-                    <input
-                        type="text"
-                        name="email"
-                        id="email"
-                        placeholder="Type your email"
-                        required
-                    />
-                    <label for="password"></label>
-                    <input
-                        type="password"
-                        name="password"
-                        id="password"
-                        placeholder="Type your password"
-                        required
-                    />
-                    <button type="submit" id="login-button">Login</button>
-                    <div class="register-link-container">
-                        <a href="./register.html">Don't have an account? Register</a>
+        <div class="wrapper">
+            <header>
+                <img id="logo" src="./Google__G__Logo.svg.png" alt="bill app logo" />
+                <h1>Split bills</h1>
+                <p id="best-in-market">Best in Market</p>
+            </header>
+            <main>
+                <section>
+                    <div id="login-form-wrapper">
+                        <form id="login-form">
+                            <h1>Login</h1>
+                            <label for="email">Email</label>
+                            <input
+                                type="text"
+                                name="email"
+                                id="email"
+                                placeholder="Type your email"
+                                required
+                            />
+                            <label for="password">Password</label>
+                            <input
+                                type="password"
+                                name="password"
+                                id="password"
+                                placeholder="Type your password"
+                                required
+                            />
+                            <button type="submit" id="login-button">Login</button>
+                            <div class="register-link-container">
+                                <a href="./register.html">Don't have an account? Register</a>
+                            </div>
+                        </form>
                     </div>
-                </form>
-            </section>
-        </main>
+                </section>
+            </main>
+        </div>
     </body>
 </html>
