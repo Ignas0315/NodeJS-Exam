@@ -1,3 +1,8 @@
+body {
+    font-family: 'Open Sans', sans-serif;
+    box-sizing: border-box;
+}
+
 .button {
     padding: 8px 16px;
     border: none;
@@ -95,21 +100,24 @@ input {
 
 #add-bill,
 #login-form,
-#registration-form {
+#registration-form,
+#add-user-to-group {
     width: 50%;
     margin: 0 auto;
 }
 
 #add-bill *,
 #login-form *,
-#registration-form * {
+#registration-form *,
+#add-user-to-group * {
     text-align: left;
     width: 100%;
 }
 
 #add-bill h1,
 #login-form h1,
-#registration-form h1 {
+#registration-form h1,
+#add-user-to-group h1 {
     font-size: 18px;
     font-weight: bold;
     margin-bottom: 24px;
@@ -117,7 +125,8 @@ input {
 
 #add-bill input,
 #login-form input,
-#registration-form input {
+#registration-form input,
+#add-user-to-group input {
     height: 24px;
     margin-bottom: 16px;
     border: 1px solid rgb(192, 192, 192);
@@ -125,7 +134,8 @@ input {
 
 #add-bill label,
 #login-form label,
-#registration-form label {
+#registration-form label,
+#add-user-to-group label {
     font-size: 14px;
     font-weight: bold;
     margin-bottom: 4px;
@@ -133,7 +143,8 @@ input {
 
 #submit-bill,
 #login-button,
-#register-button {
+#register-button,
+#submit-user-to-group {
     padding: 8px 0 8px 0;
     font-weight: bold;
     border: 2px solid black;
@@ -146,6 +157,44 @@ input {
 
 #register-button {
     width: 30%;
+}
+
+#groups-container {
+    padding: 0 16px 0 16px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    margin: -24px 0 0 0;
+    margin-bottom: 96px;
+}
+
+/* #groups-container:after {
+    content: '';
+    flex-grow: 25;
+} */
+
+.group-card {
+    text-align: center;
+    width: 150px;
+    border: 1px solid rgb(182, 182, 182);
+    border-radius: 8px;
+    overflow: hidden;
+    margin: 0 auto;
+    margin-top: 24px;
+    gap: 16px;
+    box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px;
+    padding: 32px 48px 32px 48px;
+}
+
+.group-id {
+    font-weight: bold;
+    font-size: 24px;
+    margin-bottom: 16px;
+}
+
+.group-name {
+    font-size: 16px;
+    color: #818181;
 }
 
 #table-main {
@@ -171,4 +220,11 @@ input {
 
 #table-main tr:nth-child(even) {
     background-color: #e2e2e2;
+}
+
+#select-group-heading {
+    text-align: center;
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 96px;
 }
