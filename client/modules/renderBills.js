@@ -31,13 +31,13 @@ const renderGroupBills = async () => {
             tableBody.setAttribute('id', 'table-body');
             tableHeadRow.setAttribute('id', 'table-head-row');
 
-            tableHeadId.innerHTML = 'Group ID';
+            tableHeadId.innerHTML = 'Bill ID';
             tableHeadAmount.innerHTML = 'Amount';
             tableHeadDescription.innerHTML = 'Description';
 
             tableHeadRow.appendChild(tableHeadId);
-            tableHeadRow.appendChild(tableHeadAmount);
             tableHeadRow.appendChild(tableHeadDescription);
+            tableHeadRow.appendChild(tableHeadAmount);
 
             tableBody.appendChild(tableHeadRow);
             tableEl.appendChild(tableBody);
@@ -53,8 +53,8 @@ const renderGroupBills = async () => {
                 descriptionDataCell.innerHTML = bill.description;
 
                 newRow.appendChild(idDataCell);
-                newRow.appendChild(amountDataCell);
                 newRow.appendChild(descriptionDataCell);
+                newRow.appendChild(amountDataCell);
 
                 tableBody.appendChild(newRow);
             });
