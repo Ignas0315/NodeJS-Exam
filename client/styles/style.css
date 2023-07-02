@@ -32,3 +32,59 @@ label {
 input {
     display: block;
 }
+
+.wrapper {
+    margin: auto;
+    margin-top: 48px;
+    width: 80%;
+    border: 1px solid black;
+}
+
+.wrapper header * {
+    text-align: center;
+}
+
+.wrapper header h1 {
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin-bottom: 16px;
+}
+
+.wrapper header p {
+    font-size: 1rem;
+    margin-bottom: 16px;
+}
+
+#logo {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    border: 2px solid rgb(167, 167, 167);
+    padding: 4px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 16px;
+    margin-top: 16px;
+    box-shadow: 8px 8px 4px #ccc;
+}
+
+#bills * {
+    margin: 0 auto;
+    text-align: center;
+}
+
+#add-bill * {
+    margin: 0 auto;
+    text-align: center;
+}
+
+#submit-bill {
+    display: block;
+}
+
+#table-main {
+    width: 100%;
+    margin-top: 16px;
+    margin-bottom: 48px;
+}
