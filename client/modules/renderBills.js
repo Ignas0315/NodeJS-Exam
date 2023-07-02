@@ -27,18 +27,22 @@ const renderGroupBills = async () => {
             const tableHeadDescription = document.createElement('th');
             const tableHeadAmount = document.createElement('th');
 
-            tableEl.setAttribute('id', 'table');
+            tableEl.setAttribute('id', 'table-main');
             tableBody.setAttribute('id', 'table-body');
             tableHeadRow.setAttribute('id', 'table-head-row');
 
+            tableHeadId.innerHTML = 'Group ID';
+            tableHeadAmount.innerHTML = 'Amount';
+            tableHeadDescription.innerHTML = 'Description';
+
             tableHeadRow.appendChild(tableHeadId);
-            tableHeadRow.appendChild(tableHeadDescription);
             tableHeadRow.appendChild(tableHeadAmount);
+            tableHeadRow.appendChild(tableHeadDescription);
 
             tableBody.appendChild(tableHeadRow);
             tableEl.appendChild(tableBody);
 
-            groupBills.forEach((bill) => {
+            groupBills.forEach((bill, index) => {
                 const newRow = document.createElement('tr');
                 const idDataCell = document.createElement('td');
                 const amountDataCell = document.createElement('td');

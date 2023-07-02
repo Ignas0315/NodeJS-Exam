@@ -5,24 +5,29 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>Document</title>
+        <link rel="stylesheet" href="./styles/reset.css" />
         <link rel="stylesheet" href="./styles/style.css" />
         <script type="module" src="./modules/bills.js" defer></script>
     </head>
     <body>
-        <header></header>
-        <main>
-            <h1>Text</h1>
-            <section id="bills"></section>
-            <section>
-                <form id="add-bill">
-                    <h1>Add Bill</h1>
-                    <label for="amount">Amount</label>
-                    <input type="number" name="amount" id="amount" required />
-                    <label for="description">Description</label>
-                    <input type="text" name="description" id="description" required />
-                    <button type="submit" id="submit-bill">Add</button>
-                </form>
-            </section>
-        </main>
+        <div class="wrapper">
+            <header>
+                <img id="logo" src="./Google__G__Logo.svg.png" alt="bill app logo" />
+                <h1>Split bills</h1>
+            </header>
+            <main>
+                <section id="bills"></section>
+                <section>
+                    <form id="add-bill">
+                        <h1>Add Bill</h1>
+                        <label for="amount">Amount</label>
+                        <input type="number" name="amount" id="amount" required />
+                        <label for="description">Description</label>
+                        <input type="text" name="description" id="description" required />
+                        <button type="submit" id="submit-bill">Add</button>
+                    </form>
+                </section>
+            </main>
+        </div>
     </body>
 </html>
