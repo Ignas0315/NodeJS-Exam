@@ -37,7 +37,10 @@ input {
     margin: auto;
     margin-top: 48px;
     width: 80%;
-    border: 1px solid black;
+}
+
+.wrapper header {
+    margin-bottom: 32px;
 }
 
 .wrapper header * {
@@ -53,6 +56,12 @@ input {
 .wrapper header p {
     font-size: 1rem;
     margin-bottom: 16px;
+}
+
+#best-in-market {
+    color: #818181;
+    text-transform: uppercase;
+    font-weight: 500;
 }
 
 #logo {
@@ -84,39 +93,45 @@ input {
     margin-bottom: 32px;
 }
 
-#add-bill {
+#add-bill,
+#login-form {
     width: 50%;
     margin: 0 auto;
 }
 
-#add-bill * {
+#add-bill *,
+#login-form * {
     text-align: left;
     width: 100%;
 }
 
-#add-bill h1 {
+#add-bill h1,
+#login-form h1 {
     font-size: 18px;
     font-weight: bold;
     margin-bottom: 24px;
 }
 
-#add-bill input {
+#add-bill input,
+#login-form input {
     height: 24px;
     margin-bottom: 16px;
     border: 1px solid rgb(192, 192, 192);
 }
 
-#add-bill label {
+#add-bill label,
+#login-form label {
     font-size: 14px;
     font-weight: bold;
     margin-bottom: 4px;
 }
 
-#submit-bill {
+#submit-bill,
+#login-button {
     padding: 8px 0 8px 0;
     font-weight: bold;
     border: 2px solid black;
-    width: 15%;
+    width: 20%;
     text-align: center;
     vertical-align: middle;
     margin-bottom: 32px;
@@ -127,7 +142,6 @@ input {
     width: 100%;
     margin-top: 16px;
     margin-bottom: 48px;
-    border: 1px solid black;
 }
 
 #table-main * {
