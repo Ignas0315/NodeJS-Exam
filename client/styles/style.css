@@ -1,5 +1,5 @@
 .button {
-    padding: 10px 20px;
+    padding: 8px 16px;
     border: none;
     cursor: pointer;
     font-size: 16px;
@@ -69,22 +69,82 @@ input {
     box-shadow: 8px 8px 4px #ccc;
 }
 
+#bills {
+    margin-top: 64px;
+}
+
 #bills * {
     margin: 0 auto;
     text-align: center;
 }
 
-#add-bill * {
+#bills h1 {
+    font-size: 28px;
+    font-weight: bolder;
+    margin-bottom: 32px;
+}
+
+#add-bill {
+    width: 50%;
     margin: 0 auto;
-    text-align: center;
+}
+
+#add-bill * {
+    text-align: left;
+    width: 100%;
+}
+
+#add-bill h1 {
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 24px;
+}
+
+#add-bill input {
+    height: 24px;
+    margin-bottom: 16px;
+    border: 1px solid rgb(192, 192, 192);
+}
+
+#add-bill label {
+    font-size: 14px;
+    font-weight: bold;
+    margin-bottom: 4px;
 }
 
 #submit-bill {
-    display: block;
+    padding: 8px 0 8px 0;
+    font-weight: bold;
+    border: 2px solid black;
+    width: 15%;
+    text-align: center;
+    vertical-align: middle;
+    margin-bottom: 32px;
+    background-color: #fff;
 }
 
 #table-main {
     width: 100%;
     margin-top: 16px;
     margin-bottom: 48px;
+    border: 1px solid black;
+}
+
+#table-main * {
+    margin: 0 auto;
+}
+
+#table-main th {
+    padding: 8px 24px;
+    text-align: left;
+    font-weight: bold;
+}
+
+#table-main td {
+    padding: 8px 24px;
+    text-align: left;
+}
+
+#table-main tr:nth-child(even) {
+    background-color: #e2e2e2;
 }
