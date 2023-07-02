@@ -178,6 +178,22 @@ server.post('/accounts', authenticate, async (req, res) => {
     }
 
     try {
+        const [duplicate_check] = await pool.execute(
+            `SELECT * FROM bills_project.accounts WHERE group_id = ? AND user_id= ? `,
+            [postAccountsPayload.group_id, user_id]
+        );
+
+        if (duplicate_check.length > 1 || duplicate_check.length == 1) {
+            return res.send({
+                message: 'User and group combination already exists. Try another group.',
+            });
+        }
+    } catch (error) {
+        res.status(500).send(error).end();
+        return console.error(error);
+    }
+
+    try {
         await pool.execute(`INSERT INTO bills_project.accounts (group_id,user_id) VALUES (?,?)`, [
             postAccountsPayload.group_id,
             user_id,
