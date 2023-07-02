@@ -94,40 +94,46 @@ input {
 }
 
 #add-bill,
-#login-form {
+#login-form,
+#registration-form {
     width: 50%;
     margin: 0 auto;
 }
 
 #add-bill *,
-#login-form * {
+#login-form *,
+#registration-form * {
     text-align: left;
     width: 100%;
 }
 
 #add-bill h1,
-#login-form h1 {
+#login-form h1,
+#registration-form h1 {
     font-size: 18px;
     font-weight: bold;
     margin-bottom: 24px;
 }
 
 #add-bill input,
-#login-form input {
+#login-form input,
+#registration-form input {
     height: 24px;
     margin-bottom: 16px;
     border: 1px solid rgb(192, 192, 192);
 }
 
 #add-bill label,
-#login-form label {
+#login-form label,
+#registration-form label {
     font-size: 14px;
     font-weight: bold;
     margin-bottom: 4px;
 }
 
 #submit-bill,
-#login-button {
+#login-button,
+#register-button {
     padding: 8px 0 8px 0;
     font-weight: bold;
     border: 2px solid black;
@@ -136,6 +142,10 @@ input {
     vertical-align: middle;
     margin-bottom: 32px;
     background-color: #fff;
+}
+
+#register-button {
+    width: 30%;
 }
 
 #table-main {
