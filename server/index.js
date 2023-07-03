@@ -17,8 +17,6 @@ const pool = mysql.createPool(DB_CONFIG);
 
 const PORT = process.env.PORT || 8080;
 
-console.log(DB_CONFIG);
-
 const groupsSchema = Joi.object({
     name: Joi.string().trim().required(),
 });
@@ -36,7 +34,6 @@ const userLoginSchema = Joi.object({
 
 const accountsSchema = Joi.object({
     group_id: Joi.number().integer().required(),
-    // user_id: Joi.number().integer().required()
 });
 
 const newBillSchema = Joi.object({
@@ -93,11 +90,7 @@ server.post('/register', async (req, res) => {
 
         await pool.execute(
             `INSERT INTO bills_project.users (full_name,email,password) VALUES (?,?,?)`,
-            [
-                registrationEntryPayload.full_name,
-                registrationEntryPayload.email,
-                mysql.escape(encryptedPassword),
-            ]
+            [registrationEntryPayload.full_name, registrationEntryPayload.email, encryptedPassword]
         );
 
         return res.status(201).send({ message: 'Registered' }).end();
@@ -130,8 +123,6 @@ server.post('/login', async (req, res) => {
             loginPayload.password,
             loginData[0].password
         );
-
-        console.log(isPasswordMatching);
 
         if (isPasswordMatching) {
             const token = jwt.sign(
