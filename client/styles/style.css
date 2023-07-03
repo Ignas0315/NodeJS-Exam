@@ -3,8 +3,16 @@ body {
     box-sizing: border-box;
 }
 
+#index-buttons-wrapper {
+    text-align: center;
+}
+
+#index-buttons-wrapper a {
+    text-decoration: none;
+}
+
 .button {
-    padding: 8px 16px;
+    padding: 10px 20px;
     border: none;
     cursor: pointer;
     font-size: 16px;
@@ -12,10 +20,12 @@ body {
     color: #fff;
     text-align: center;
     transition: background-color 0.3s;
+    text-decoration: none;
 }
 
 .button1 {
     background-color: #1c797c;
+    text-decoration: none;
 }
 
 .button1:hover {
@@ -24,6 +34,7 @@ body {
 
 .button2 {
     background-color: #008cba;
+    text-decoration: none;
 }
 
 .button2:hover {
@@ -101,7 +112,8 @@ input {
 #add-bill,
 #login-form,
 #registration-form,
-#add-user-to-group {
+#add-user-to-group,
+#create-new-group {
     width: 50%;
     margin: 0 auto;
 }
@@ -109,7 +121,8 @@ input {
 #add-bill *,
 #login-form *,
 #registration-form *,
-#add-user-to-group * {
+#add-user-to-group *,
+#create-new-group * {
     text-align: left;
     width: 100%;
 }
@@ -117,7 +130,8 @@ input {
 #add-bill h1,
 #login-form h1,
 #registration-form h1,
-#add-user-to-group h1 {
+#add-user-to-group h1,
+#create-new-group h1 {
     font-size: 18px;
     font-weight: bold;
     margin-bottom: 24px;
@@ -126,7 +140,8 @@ input {
 #add-bill input,
 #login-form input,
 #registration-form input,
-#add-user-to-group input {
+#add-user-to-group input,
+#create-new-group input {
     height: 24px;
     margin-bottom: 16px;
     border: 1px solid rgb(192, 192, 192);
@@ -135,7 +150,8 @@ input {
 #add-bill label,
 #login-form label,
 #registration-form label,
-#add-user-to-group label {
+#add-user-to-group label,
+#create-new-group label {
     font-size: 14px;
     font-weight: bold;
     margin-bottom: 4px;
@@ -144,19 +160,25 @@ input {
 #submit-bill,
 #login-button,
 #register-button,
-#submit-user-to-group {
+#submit-user-to-group,
+#create-group-btn {
     padding: 8px 0 8px 0;
     font-weight: bold;
     border: 2px solid black;
-    width: 20%;
+    width: 30%;
     text-align: center;
     vertical-align: middle;
     margin-bottom: 32px;
     background-color: #fff;
+    display: inline-block;
 }
 
 #register-button {
-    width: 30%;
+    width: 35%;
+}
+
+#no-available-groups {
+    margin: 0 auto;
 }
 
 #groups-container {
@@ -166,6 +188,13 @@ input {
     justify-content: space-between;
     margin: -24px 0 0 0;
     margin-bottom: 96px;
+}
+
+#create-group-heading {
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin-bottom: 32px;
+    text-align: center;
 }
 
 /* #groups-container:after {
@@ -227,4 +256,38 @@ input {
     font-size: 24px;
     font-weight: bold;
     margin-bottom: 96px;
+}
+
+.new-group-navigation {
+    text-align: center;
+}
+
+@media screen and (min-width: 428px) {
+    #login-button,
+    #register-button,
+    #create-group-btn {
+        padding: 8px 0 8px 0;
+        width: 30%;
+    }
+}
+
+@media screen and (min-width: 768px) {
+    #submit-bill,
+    #login-button,
+    #register-button,
+    #submit-user-to-group,
+    #create-group-btn {
+        padding: 8px 0 8px 0;
+        width: 20%;
+    }
+}
+
+@media screen and (min-width: 1024px) {
+    #submit-bill,
+    #login-button,
+    #register-button,
+    #submit-user-to-group,
+    #create-group-btn {
+        width: 15%;
+    }
 }
