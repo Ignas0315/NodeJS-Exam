@@ -29,7 +29,7 @@ loginBtn.addEventListener('click', async (event) => {
         }
 
         if (!response.ok) {
-            return alert(response.status.Text);
+            return alert('Wrong email or password');
         }
     } catch (error) {
         console.log(error);
