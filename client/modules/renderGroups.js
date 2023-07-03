@@ -6,8 +6,6 @@ const renderUserGroups = async () => {
 
         const groupsContainer = document.getElementById('groups-container');
 
-        console.log(userGroups);
-
         if (userGroups === 0) {
             const noGroupsHeading = document.createElement('h1');
             noGroupsHeading.setAttribute('id', 'no-available-groups');
@@ -31,7 +29,7 @@ const renderUserGroups = async () => {
                     window.location.assign(`./bills.html?group_id=${groupId}`);
                 });
 
-                groupCardId.innerHTML = groupId;
+                groupCardId.innerHTML = `ID: ${groupId}`;
                 groupCardName.innerHTML = groupName;
 
                 groupsContainer.appendChild(groupCard);

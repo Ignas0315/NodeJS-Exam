@@ -22,8 +22,12 @@ addUserToGroupBtn.addEventListener('click', async (event) => {
         const groupAdd = await res.json();
 
         if (res.ok) {
-            if (groupAdd.message.includes('User added to the group'))
+            if (groupAdd.message.includes('User added to the group')) {
                 alert(`You were added to group ${groupIdInput}`);
+                window.location.reload();
+            }
+            //     alert(`You were added to group ${groupIdInput}`);
+            //
         }
         if (!res.ok) {
             alert('Could not add to new group');
